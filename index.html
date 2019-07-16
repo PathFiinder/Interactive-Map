@@ -1,14 +1,36 @@
 <!DOCTYPE html>
 <html lang="pl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link rel="stylesheet" href="jquery-jvectormap-2.0.3.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
-    <h1>Intereactive Map</h1>
+    <main class="main">
+        <header class="header">
+            <h1 class="header__title">Interactive Map using jVectorMap</h1>
+            <h3 class="header__counted-visited">Number of countries you have visited: <span
+                    class="header__counter-visited--number"></span></h3>
+            <h4></h4>
+        </header>
+        <section class="instruction">
+            <button class="instruction__button">click for instructions how to use it</button>
+        </section>
+        <div class="map-container"></div>
+        <div class="countries"></div>
+
+    </main>
+
+
     <script type="module" src="js/Map.js"></script>
-</body>
+    <script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+    <script src="jquery-jvectormap-2.0.3.min.js"></script>
+    <script src="jquery-jvectormap-world-mill.js"></script>
+
 </html>
