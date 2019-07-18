@@ -4,6 +4,7 @@ import jvmCountries from './jVectorMap-Date.js';
 class Map {
     constructor() {
         this.searchCountryClass = document.querySelector('.countries__search');
+        this.searchingTypeClass = document.querySelector('.coutries__searching-type');
         this.visitedCountries = ["PL"]
         this.listOfCountries = Object.values(jvmCountries)
         this.ifExist = false;
@@ -47,7 +48,7 @@ class Map {
             this.visitedCountries.splice(this.index, 1)
             document.querySelector('.header__counter-visited--number').textContent = this.visitedCountries.length;
         }
-        console.log(this.ifExist)
+
         console.log(this.visitedCountries)
     }
 
@@ -70,21 +71,8 @@ class Map {
                     const map = $('.map-container__map').vectorMap('get', 'mapObject');
                     const regionName = map.getRegionName(string);
                     const code = string
-                    console.log(code)
+
                     this.addVisitedCountry(code);
-
-
-
-                    console.log(code)
-                    //console.log(this.visitedCountries)
-
-
-
-                    //console.log(event)
-                    //console.log("Code: " + code);
-                    //console.log("Region Name: " + regionName);
-
-                    //const newRegion = map.setSelectedRegions('EH');
                 }
             });
         })
@@ -95,16 +83,30 @@ class Map {
         this.searchCountryClass.addEventListener('input', (event) => {
             event.preventDefault();
             const value = event.target.value;
-
+            //includes
             this.listOfCountries.forEach((element) => {
                 let elementValue = element.code
-                if (value.toLowerCase() == elementValue.toLowerCase()) {
-                    const map = $('.map-container__map').vectorMap('get', 'mapObject');
-                    map.setSelectedRegions(value.toUpperCase());
-                    console.log(this.ifExist)
-                }
-            })
 
+                if (this.searchingTypeClass.value == "code") {
+                    if (value.length == 2) {
+                        if (value.toLowerCase() == elementValue.toLowerCase()) {
+                            const map = $('.map-container__map').vectorMap('get', 'mapObject');
+                            map.setSelectedRegions(value.toUpperCase());
+                            this.addVisitedCountry(value.toUpperCase());
+                            this.searchCountryClass.value = ""
+                            console.log(this.visitedCountries)
+                        }
+                    }
+                } else if(this.searchingTypeClass.value == "country-name"){
+                    if(element.name.toLowerCase().includes(value.toLowerCase())){
+                        console.log(element.name)
+                    }
+                } 
+
+
+
+
+            })
         })
     }
 }

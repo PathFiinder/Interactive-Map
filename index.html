@@ -27,7 +27,11 @@
         <div class="countries">
             <form action="#" class="countries__form">
                 <label for="country-search">Search: </label>
-                <input type="text" class="countries__search" id="country-search" placeholder="Input country name or ISO2" >
+                <input type="text" class="countries__search" id="country-search" placeholder="By code or country name" >
+                <select name="type-of-search" class="coutries__searching-type">
+                    <option class="countries__single-type countries__single-type--code" value="code">Code - ISO2</option>
+                    <option class="countries__single-type countries__single-type--country" value="country-name">Country Name</option>
+                  </select>
             </form>
             <div class="countries__finded"></div>
         </div>
