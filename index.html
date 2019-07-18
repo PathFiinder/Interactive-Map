@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="jquery-jvectormap-2.0.3.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -14,15 +15,22 @@
     <main class="main">
         <header class="header">
             <h1 class="header__title">Interactive Map using jVectorMap</h1>
-            <h3 class="header__counted-visited">Number of countries you have visited: <span
-                    class="header__counter-visited--number"></span></h3>
-            <h4></h4>
+            <h2 class="header__counted-visited">Number of countries you have visited: <span
+                    class="header__counter-visited--number">1</span></h3>
         </header>
         <section class="instruction">
             <button class="instruction__button">click for instructions how to use it</button>
         </section>
-        <div class="map-container"></div>
-        <div class="countries"></div>
+        <div class="map-container">
+            <div class="map-container__map"></div>
+        </div>
+        <div class="countries">
+            <form action="#" class="countries__form">
+                <label for="country-search">Search: </label>
+                <input type="text" class="countries__search" id="country-search" placeholder="Input country name or ISO2" >
+            </form>
+            <div class="countries__finded"></div>
+        </div>
 
     </main>
 
