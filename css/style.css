@@ -10,7 +10,7 @@ body {
   min-height: 100vh;
   min-width: 320px;
   max-width: 1300px;
-  overflow: hidden;
+  overflow-x: hidden;
 }
 
 .main {
@@ -23,7 +23,7 @@ body {
           flex-direction: column;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #e5e5f9;
 }
 
@@ -51,8 +51,8 @@ body {
 }
 
 .map-container {
-  -ms-flex-preferred-size: 280px;
-      flex-basis: 280px;
+  height: 280px;
+  overflow: hidden;
 }
 
 .map-container__map {
@@ -72,11 +72,26 @@ body {
 .countries__finded {
   width: 80%;
   margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .countries__finded--active {
   border: 1px solid black;
   height: 100px;
+}
+
+.countries__finded .single-country {
+  -ms-flex-preferred-size: 100%;
+      flex-basis: 100%;
+  border: 1px solid black;
 }
 
 @media only screen and (min-width: 576px) {

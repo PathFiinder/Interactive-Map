@@ -12,13 +12,13 @@ body
     min-height: 100vh
     min-width: 320px
     max-width: 1300px  
-    overflow: hidden
+    overflow-x: hidden
 
 .main
     display: flex
     flex-direction: column
     flex-wrap: wrap
-    height: 100vh
+    min-height: 100vh
     background-color: #e5e5f9
         
 
@@ -42,7 +42,8 @@ body
         
 
 .map-container
-    flex-basis: 280px
+    height: 280px
+    overflow: hidden
     &__map
         height: 100%
         width: 100%
@@ -55,9 +56,15 @@ body
     &__finded
         width: 80%
         margin: 0 auto
+        display: flex
+        flex-direction: column
+        flex-wrap: wrap
         &--active
             border: 1px solid black
             height: 100px
+        .single-country
+            flex-basis: 100%
+            border: 1px solid black
 
 @media only screen and (min-width: 576px)
     .map-container
