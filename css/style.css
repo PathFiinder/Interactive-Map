@@ -11,6 +11,7 @@ body {
   min-width: 320px;
   max-width: 1300px;
   overflow-x: hidden;
+  font-family: 'Open Sans', sans-serif;
 }
 
 .main {
@@ -30,7 +31,6 @@ body {
 .header {
   -ms-flex-preferred-size: 5%;
       flex-basis: 5%;
-  border: 1px solid black;
   text-align: center;
   font-size: 12px;
 }
@@ -38,13 +38,11 @@ body {
 .instruction {
   -ms-flex-preferred-size: 5%;
       flex-basis: 5%;
-  border: 1px solid black;
   text-align: center;
   padding-top: 0.5%;
 }
 
 .instruction__button {
-  border: 1px solid black;
   padding: 5px;
   height: 80%;
   text-transform: uppercase;
@@ -64,7 +62,6 @@ body {
   -webkit-box-flex: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
-  border: 1px solid black;
   text-align: center;
   font-size: 20px;
 }
@@ -92,6 +89,62 @@ body {
   -ms-flex-preferred-size: 100%;
       flex-basis: 100%;
   border: 1px solid black;
+}
+
+.countries__visited, .countries .visitedCountries {
+  width: 100%;
+  text-align: center;
+  display: none;
+}
+
+.countries__visited__title, .countries .visitedCountries__title {
+  font-size: 25px;
+}
+
+.countries__visited__container, .countries .visitedCountries__container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  display: block;
+}
+
+.countries__visited__container .visitedCountries__continent, .countries .visitedCountries__container .visitedCountries__continent {
+  display: none;
+}
+
+.countries__visited__container .visitedCountries__continent .visitedCountries__continentName, .countries .visitedCountries__container .visitedCountries__continent .visitedCountries__continentName {
+  font-size: 20px;
+}
+
+.countries__visited__container .visitedCountries__continent .visitedCountries__wrapper, .countries .visitedCountries__container .visitedCountries__continent .visitedCountries__wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.countries__visited__container .visitedCountries__continent .visitedCountries__wrapper .visitedCountries__single, .countries .visitedCountries__container .visitedCountries__continent .visitedCountries__wrapper .visitedCountries__single {
+  -ms-flex-preferred-size: 25%;
+      flex-basis: 25%;
+}
+
+.countries__visited__container .visitedCountries__continent--active, .countries .visitedCountries__container .visitedCountries__continent--active {
+  display: block;
+}
+
+.countries__visited--active, .countries .visitedCountries--active {
+  display: block;
 }
 
 @media only screen and (min-width: 576px) {

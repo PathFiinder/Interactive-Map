@@ -6,16 +6,17 @@ class Map {
         this.searchCountryClass = document.querySelector('.countries__search');
         this.searchingTypeClass = document.querySelector('.coutries__searching-type');
         this.findedCountriesClass = document.querySelector('.countries__finded');
-        this.visitedCountries = ["PL"]
+        this.visitedCountryClass = document.querySelector('.visitedCountries');
+        this.visitedCountries = [];
         this.listOfCountries = Object.values(jvmCountries)
         this.ifExist = false;
         this.index = 0;
-
-        this.deletedCountryFromListOfCountries = [];
+        //console.log(this.listOfCountries)
+        this.listOfContinents = ['Asia','Africa','AmericaN','AmericaS','Europe','Oceania','Antarctica'];
         this.getContinent();
         this.initializeMap();
         this.searchCountry();
-
+        this.changeSelectValue();
 
     }
 
@@ -31,12 +32,22 @@ class Map {
         })
     }
 
+    clearChilds() {
+
+        let child = this.findedCountriesClass.lastElementChild;
+        while (child) {
+            this.findedCountriesClass.removeChild(child);
+            child = this.findedCountriesClass.lastElementChild;
+        }
+    }
+
     addVisitedCountry() {
         this.findedCountriesClass.addEventListener('click', (event) => {
             if (event.target.dataset.id) {
+
                 if (this.visitedCountries.length != 0) {
                     for (let i = 0; i < this.visitedCountries.length; i++) {
-                        if (this.visitedCountries[i] == event.target.dataset.id) {
+                        if (this.visitedCountries[i].code == event.target.dataset.id) {
                             this.ifExist = true;
                             this.index = i;
                             break;
@@ -47,37 +58,21 @@ class Map {
                 }
 
                 if (this.ifExist == false) {
-                    this.visitedCountries.push(event.target.dataset.id)
-                    document.querySelector('.header__counter-visited--number').textContent = this.visitedCountries.length;
-
                     this.listOfCountries.forEach((element, index) => {
                         if (element.code == event.target.dataset.id) {
+                            this.visitedCountries.push(element)
                             this.listOfCountries.splice(index, 1);
-                            this.deletedCountryFromListOfCountries.push(element)
                         }
                     })
-                    console.log(this.deletedCountryFromListOfCountries)
-
-
-
-
-
+                    document.querySelector('.header__counter-visited--number').textContent = this.visitedCountries.length;
                 }
-
-
-
 
                 const map = $('.map-container__map').vectorMap('get', 'mapObject');
                 map.setSelectedRegions(event.target.dataset.id);
                 this.searchCountryClass.value = ""
 
-                let child = this.findedCountriesClass.lastElementChild;
-                while (child) {
-                    this.findedCountriesClass.removeChild(child);
-                    child = this.findedCountriesClass.lastElementChild;
-                }
-
-                //console.log(this.visitedCountries)
+                this.clearChilds();
+                // console.log(this.visitedCountries)
                 //console.log(this.listOfCountries)
             }
         })
@@ -88,7 +83,48 @@ class Map {
 
     }
 
+    addVisitedCountryContinent(){
+        if(this.visitedCountries != 0){
+            this.visitedCountryClass.classList.add('visitedCountries--active')
 
+            this.visitedCountries.forEach((element,index) => {
+                //console.log(element.continent)
+
+                /*this.listOfContinents.forEach((ele,id) => {
+                    console.log(ele)
+                    if(element.continent == ele){
+                        document.querySelector(`.visitedCountries__continent--${element.continent}`).classList.add('visitedCountries__continent--active');
+                        console.log(id)
+                        //cos jak break !!!!
+                    } else {
+                        console.log(element.continent)
+                        console.log(id,"nie")
+                        document.querySelector(`.visitedCountries__continent--${element.continent}`).classList.remove('visitedCountries__continent--active');
+                    }
+                })*/
+                console.log(this.visitedCountries)
+                for(let i=0;i<this.listOfContinents.length;i++){
+                    if(this.listOfContinents[i] == element.continent){
+                        document.querySelector(`.visitedCountries__continent--${element.continent}`).classList.add('visitedCountries__continent--active');
+                        console.log(element.continent + " tak")
+                        break;
+                    } 
+                    if(this.listOfContinents[i] != element.continent){
+                        document.querySelector(`.visitedCountries__continent--${element.continent}`).classList.remove('visitedCountries__continent--active');
+                        console.log(element.continent + " nie")
+                    }
+                }
+            })
+            
+           
+
+
+        } else {
+            this.visitedCountryClass.classList.remove('visitedCountries--active')
+        }
+        console.log(this.visitedCountries)
+    }
+    
     initializeMap() {
         $(() => {
             $('.map-container__map').vectorMap({
@@ -101,7 +137,7 @@ class Map {
                     }
                 },
                 selectedRegions: {
-                    "PL": " "
+                    //"PL": " "
                 },
                 onRegionClick: (event, string) => {
                     const map = $('.map-container__map').vectorMap('get', 'mapObject');
@@ -110,7 +146,7 @@ class Map {
 
                     if (this.visitedCountries.length != 0) {
                         for (let i = 0; i < this.visitedCountries.length; i++) {
-                            if (this.visitedCountries[i] == code) {
+                            if (this.visitedCountries[i].code == code) {
                                 this.ifExist = true;
                                 this.index = i;
                                 break;
@@ -121,23 +157,29 @@ class Map {
                     }
 
                     if (this.ifExist == false) {
-                        this.visitedCountries.push(code)
+                        this.listOfCountries.forEach((element, index) => {
+                            if (element.code == code) {
+                                this.visitedCountries.push(element)
+                                this.listOfCountries.splice(index, 1);
+                            }
+                        })
                         document.querySelector('.header__counter-visited--number').textContent = this.visitedCountries.length;
+                        
                     } else if (this.ifExist == true) {
-                        this.visitedCountries.splice(this.index, 1)
+                        this.listOfCountries.push(this.visitedCountries[this.index]);
+                        
+                        this.visitedCountries.splice(this.index, 1);
                         document.querySelector('.header__counter-visited--number').textContent = this.visitedCountries.length;
-
-                       
                     }
-
-                    console.log(this.visitedCountries)
+                    //console.log(this.listOfCountries)
+                    //console.log(this.visitedCountries)
                     
                 }
             });
         })
     }
 
-    createElement(code, countryName) {
+    createElementCountries(code, countryName) {
         const divElement = document.createElement("div");
         divElement.classList.add("single-country");
         divElement.dataset.id = `${code}`;
@@ -154,40 +196,42 @@ class Map {
         countryNameElement.textContent = `${countryName}`;
         document.querySelector(`[data-id = "${code}"]`).appendChild(countryNameElement);
 
-        const binElement = document.createElement("i")
+        /*const binElement = document.createElement("i")
         binElement.classList.add('single-country__bin', 'far', 'fa-trash-alt');
         binElement.dataset.idb = `${code}`
-        document.querySelector(`[data-id = "${code}"]`).appendChild(binElement);
+        document.querySelector(`[data-id = "${code}"]`).appendChild(binElement);*/
     }
 
+    changeSelectValue(){
+        document.querySelector('.coutries__searching-type').addEventListener('change',() => {
+            this.searchCountryClass.value = ""
+            this.clearChilds();
+        })
+    }
 
     searchCountry() {
         this.searchCountryClass.addEventListener('input', (event) => {
             event.preventDefault();
             const value = event.target.value;
-
-            let child = this.findedCountriesClass.lastElementChild;
-            while (child) {
-                this.findedCountriesClass.removeChild(child);
-                child = this.findedCountriesClass.lastElementChild;
-            }
+            this.clearChilds();
 
             this.listOfCountries.forEach((element) => {
                 if (this.searchingTypeClass.value == "code") {
                     if (element.code.toLowerCase().includes(value.toLowerCase())) {
-                        this.createElement(element.code, element.name)
+                        this.createElementCountries(element.code, element.name)
                         this.addVisitedCountry();
                     }
                 } else if (this.searchingTypeClass.value == "country-name") {
                     if (element.name.toLowerCase().includes(value.toLowerCase())) {
-                        console.log(element.name)
+                        this.createElementCountries(element.code, element.name)
+                        this.addVisitedCountry();
                     }
                 }
-
-
-
-
             })
+
+            if(this.searchCountryClass.value == ""){
+                this.clearChilds();
+            }
         })
     }
 }

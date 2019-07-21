@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
-    <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="jquery-jvectormap-2.0.3.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -16,7 +16,7 @@
         <header class="header">
             <h1 class="header__title">Interactive Map using jVectorMap</h1>
             <h2 class="header__counted-visited">Number of countries you have visited: <span
-                    class="header__counter-visited--number">1</span></h3>
+                    class="header__counter-visited--number">0</span></h3>
         </header>
         <section class="instruction">
             <button class="instruction__button">click for instructions how to use it</button>
@@ -36,6 +36,40 @@
                 </select>
             </form>
             <div class="countries__finded"></div>
+            <div class="countries__visited visitedCountries">
+                <h2 class="visitedCountries__title">Visted countries</h2>
+                <div class="visitedCountries__container">
+                    <div class="visitedCountries__continent visitedCountries__continent--Asia">
+                        <h3 class="visitedCountries__continentName">Asia</h3>
+                        <div class="visitedCountries__wrapper visitedCountries__wrapper--Asia">
+                        </div>
+                    </div>
+                    <div class="visitedCountries__continent visitedCountries__continent--Africa">
+                        <h3 class="visitedCountries__continentName">Africa</h3>
+                        <div class="visitedCountries__wrapper visitedCountries__wrapper--Africa"></div>
+                    </div>
+                    <div class="visitedCountries__continent visitedCountries__continent--AmericaN">
+                        <h3 class="visitedCountries__continentName">North America</h3>
+                        <div class="visitedCountries__wrapper visitedCountries__wrapper--AmericaN"></div>
+                    </div>
+                    <div class="visitedCountries__continent visitedCountries__continent--AmericaS">
+                        <h3 class="visitedCountries__continentName">South America</h3>
+                        <div class="visitedCountries__wrapper visitedCountries__wrapper--AmericaS"></div>
+                    </div>
+                    <div class="visitedCountries__continent visitedCountries__continent--Europe">
+                        <h3 class="visitedCountries__continentName">Europe</h3>
+                        <div class="visitedCountries__wrapper visitedCountries__wrapper--Europe"></div>
+                    </div>
+                    <div class="visitedCountries__continent visitedCountries__continent--Oceania">
+                        <h3 class="visitedCountries__continentName">Oceania</h3>
+                        <div class="visitedCountries__wrapper visitedCountries__wrapper--Oceania"></div>
+                    </div>
+                    <div class="visitedCountries__continent visitedCountries__continent--Antarctica">
+                        <h3 class="visitedCountries__continentName">Antarctica</h3>
+                        <div class="visitedCountries__wrapper visitedCountries__wrapper--Antarctica"></div>
+                    </div>
+                </div>
+            </div>
         </section>
 
     </main>
