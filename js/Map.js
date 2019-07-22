@@ -7,17 +7,35 @@ class Map {
         this.searchingTypeClass = document.querySelector('.coutries__searching-type');
         this.findedCountriesClass = document.querySelector('.countries__finded');
         this.visitedCountryClass = document.querySelector('.visitedCountries');
+        this.barOfAllCountries = document.querySelector('.instruction__countryList');
         this.visitedCountries = [];
         this.listOfCountries = Object.values(jvmCountries)
         this.ifExist = false;
         this.index = 0;
         //console.log(this.listOfCountries)
-        this.listOfContinents = ['Asia','Africa','AmericaN','AmericaS','Europe','Oceania','Antarctica'];
+        this.listOfContinents = ['Asia', 'Africa', 'AmericaN', 'AmericaS', 'Europe', 'Oceania', 'Antarctica'];
         this.getContinent();
+        this.barListOfAllCountries();
         this.initializeMap();
         this.searchCountry();
         this.changeSelectValue();
 
+    }
+
+    barListOfAllCountries(){
+        this.barOfAllCountries.addEventListener('click',() => {
+            this.listOfCountries.forEach(element => {
+                document.querySelector('.countryListContainer__countries').innerHTML += `${element.name} : ${element.code} <br>`
+            })
+            document.querySelector('.countryListContainer').classList.add('countryListContainer--active');
+            document.querySelector('.countryListContainer__icon').classList.add('countryListContainer__icon--active')
+        });
+
+        document.querySelector('.countryListContainer__icon').addEventListener('click', () => {
+            document.querySelector('.countryListContainer__countries').textContent = ""
+            document.querySelector('.countryListContainer__icon').classList.remove('countryListContainer__icon--active')
+            document.querySelector('.countryListContainer').classList.remove('countryListContainer--active');     
+        })  
     }
 
 
@@ -62,6 +80,7 @@ class Map {
                         if (element.code == event.target.dataset.id) {
                             this.visitedCountries.push(element)
                             this.listOfCountries.splice(index, 1);
+                            this.addVisitedCountryContinent();
                         }
                     })
                     document.querySelector('.header__counter-visited--number').textContent = this.visitedCountries.length;
@@ -72,8 +91,7 @@ class Map {
                 this.searchCountryClass.value = ""
 
                 this.clearChilds();
-                // console.log(this.visitedCountries)
-                //console.log(this.listOfCountries)
+
             }
         })
 
@@ -83,48 +101,51 @@ class Map {
 
     }
 
-    addVisitedCountryContinent(){
-        if(this.visitedCountries != 0){
+    addVisitedCountryContinent() {
+        if (this.visitedCountries != 0) {
             this.visitedCountryClass.classList.add('visitedCountries--active')
-
-            this.visitedCountries.forEach((element,index) => {
-                //console.log(element.continent)
-
-                /*this.listOfContinents.forEach((ele,id) => {
-                    console.log(ele)
-                    if(element.continent == ele){
+            this.visitedCountries.forEach((element, index) => {
+                for (let i = 0; i < this.listOfContinents.length; i++) {
+                    if (this.listOfContinents[i] == element.continent) {
                         document.querySelector(`.visitedCountries__continent--${element.continent}`).classList.add('visitedCountries__continent--active');
-                        console.log(id)
-                        //cos jak break !!!!
-                    } else {
-                        console.log(element.continent)
-                        console.log(id,"nie")
-                        document.querySelector(`.visitedCountries__continent--${element.continent}`).classList.remove('visitedCountries__continent--active');
-                    }
-                })*/
-                console.log(this.visitedCountries)
-                for(let i=0;i<this.listOfContinents.length;i++){
-                    if(this.listOfContinents[i] == element.continent){
-                        document.querySelector(`.visitedCountries__continent--${element.continent}`).classList.add('visitedCountries__continent--active');
-                        console.log(element.continent + " tak")
                         break;
-                    } 
-                    if(this.listOfContinents[i] != element.continent){
-                        document.querySelector(`.visitedCountries__continent--${element.continent}`).classList.remove('visitedCountries__continent--active');
-                        console.log(element.continent + " nie")
                     }
                 }
             })
-            
+        } else {
+            this.visitedCountryClass.classList.remove('visitedCountries--active')
+        }
+
+    }
+
+    checkIfCountryContinentExist() {
+        if (this.visitedCountries != 0) {
+            this.visitedCountryClass.classList.add('visitedCountries--active');
+
+            this.listOfContinents.forEach(element => {
+                let counter = 0;
+                for(let i=0;i<this.visitedCountries.length;i++){
+                    if(this.visitedCountries[i].continent == element)
+                    counter++;
+                }
+
+                if(counter == 0){
+                    document.querySelector(`.visitedCountries__continent--${element}`).classList.remove('visitedCountries__continent--active');
+                }
+            })
            
 
 
         } else {
             this.visitedCountryClass.classList.remove('visitedCountries--active')
+            this.listOfContinents.forEach(ele => {
+                if (document.querySelector(`.visitedCountries__continent--${ele}`).classList.contains('visitedCountries__continent--active')) {
+                    document.querySelector(`.visitedCountries__continent--${ele}`).classList.remove('visitedCountries__continent--active')
+                }
+            })
         }
-        console.log(this.visitedCountries)
     }
-    
+
     initializeMap() {
         $(() => {
             $('.map-container__map').vectorMap({
@@ -164,16 +185,13 @@ class Map {
                             }
                         })
                         document.querySelector('.header__counter-visited--number').textContent = this.visitedCountries.length;
-                        
+                        this.addVisitedCountryContinent();
                     } else if (this.ifExist == true) {
                         this.listOfCountries.push(this.visitedCountries[this.index]);
-                        
                         this.visitedCountries.splice(this.index, 1);
+                        this.checkIfCountryContinentExist();
                         document.querySelector('.header__counter-visited--number').textContent = this.visitedCountries.length;
                     }
-                    //console.log(this.listOfCountries)
-                    //console.log(this.visitedCountries)
-                    
                 }
             });
         })
@@ -202,8 +220,8 @@ class Map {
         document.querySelector(`[data-id = "${code}"]`).appendChild(binElement);*/
     }
 
-    changeSelectValue(){
-        document.querySelector('.coutries__searching-type').addEventListener('change',() => {
+    changeSelectValue() {
+        document.querySelector('.coutries__searching-type').addEventListener('change', () => {
             this.searchCountryClass.value = ""
             this.clearChilds();
         })
@@ -229,10 +247,11 @@ class Map {
                 }
             })
 
-            if(this.searchCountryClass.value == ""){
+            if (this.searchCountryClass.value == "") {
                 this.clearChilds();
             }
         })
+
     }
 }
 
