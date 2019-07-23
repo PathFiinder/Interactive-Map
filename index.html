@@ -16,22 +16,46 @@
         <header class="header">
             <h1 class="header__title">Interactive Map using jVectorMap</h1>
             <h2 class="header__counted-visited">Number of countries you have visited: <span
-                    class="header__counter-visited--number">0</span></h3>
+                    class="header__counted-visited--number">0</span></h3>
         </header>
         <section class="instruction">
-            <button class="instruction__button">click for instructions how to use it</button>
+            <button class="instruction__button">Click for instructions</button>
             <i class="instruction__countryList fas fa-bars"></i>
             <aside class="instruction__countryListContainer countryListContainer">
                 <i class="countryListContainer__icon far fa-times-circle"></i>
                 <div class="countryListContainer__countries"></div>
             </aside>
+            <div class="instruction__content-container ">
+                <div class="instruction__single-item instruction__single-item--bigger item">
+                    <i class="item__icon fas fa-info-circle"></i>
+                    <p class="item__content">To select the countries you have visited you can choose the country
+                        directly from the map (by clicking on it) or use search box in two different way: by entering
+                        the two-letter coutry code (ISO alpha-2) or by entering the country name with the selected
+                        option "Country Name"</p>
+                </div>
+                <div class="instruction__single-item instruction__single-item--bigger item  ">
+                    <i class="item__icon fas fa-info-circle"></i>
+                    <p class="item__content">Selected countries are displayed both in the table divided into
+                        continents (sorted by area they occupy) and higlihted on the map.</p>
+                </div>
+                <div class="instruction__single-item item">
+                    <i class="item__icon fas fa-info-circle"></i>
+                    <p class="item__content">To remove the country from the list click the trash icon next to
+                        the country name or click on selected country directly on map</p>
+                </div>
+                <div class="instruction__single-item item">
+                    <i class="item__icon fas fa-info-circle"></i>
+                    <p class="item__content">To diplay the list of all available countries with codes click
+                        on icon (bars) next to the button "Click for instructions"</p>
+                </div>
+            </div>
         </section>
         <div class="map-container">
             <div class="map-container__map"></div>
         </div>
         <section class="countries">
             <form action="#" class="countries__form">
-                <label for="country-search">Search: </label>
+                <label for="country-search" class="countries__search-label">Search: </label>
                 <input type="text" class="countries__search" id="country-search" placeholder="By code or country name">
                 <select name="type-of-search" class="coutries__searching-type">
                     <option class="countries__single-type countries__single-type--code" value="code">Code - ISO2
@@ -46,32 +70,42 @@
                 <div class="visitedCountries__container">
                     <div class="visitedCountries__continent visitedCountries__continent--Asia">
                         <h3 class="visitedCountries__continentName">Asia</h3>
-                        <div class="visitedCountries__wrapper visitedCountries__wrapper--Asia">
+                        <div class="visitedCountries__wrapper visitedCountries__wrapper--Asia singleCountryContinent">
                         </div>
                     </div>
-                    <div class="visitedCountries__continent visitedCountries__continent--Africa">
+                    <div class="visitedCountries__continent visitedCountries__continent--Africa ">
                         <h3 class="visitedCountries__continentName">Africa</h3>
-                        <div class="visitedCountries__wrapper visitedCountries__wrapper--Africa"></div>
+                        <div class="visitedCountries__wrapper visitedCountries__wrapper--Africa singleCountryContinent">
+                        </div>
                     </div>
                     <div class="visitedCountries__continent visitedCountries__continent--AmericaN">
                         <h3 class="visitedCountries__continentName">North America</h3>
-                        <div class="visitedCountries__wrapper visitedCountries__wrapper--AmericaN"></div>
+                        <div
+                            class="visitedCountries__wrapper visitedCountries__wrapper--AmericaN singleCountryContinent">
+                        </div>
                     </div>
                     <div class="visitedCountries__continent visitedCountries__continent--AmericaS">
                         <h3 class="visitedCountries__continentName">South America</h3>
-                        <div class="visitedCountries__wrapper visitedCountries__wrapper--AmericaS"></div>
+                        <div
+                            class="visitedCountries__wrapper visitedCountries__wrapper--AmericaS singleCountryContinent">
+                        </div>
                     </div>
                     <div class="visitedCountries__continent visitedCountries__continent--Europe">
                         <h3 class="visitedCountries__continentName">Europe</h3>
-                        <div class="visitedCountries__wrapper visitedCountries__wrapper--Europe"></div>
+                        <div class="visitedCountries__wrapper visitedCountries__wrapper--Europe singleCountryContinent">
+                        </div>
                     </div>
                     <div class="visitedCountries__continent visitedCountries__continent--Oceania">
                         <h3 class="visitedCountries__continentName">Oceania</h3>
-                        <div class="visitedCountries__wrapper visitedCountries__wrapper--Oceania"></div>
+                        <div
+                            class="visitedCountries__wrapper visitedCountries__wrapper--Oceania singleCountryContinent">
+                        </div>
                     </div>
                     <div class="visitedCountries__continent visitedCountries__continent--Antarctica">
                         <h3 class="visitedCountries__continentName">Antarctica</h3>
-                        <div class="visitedCountries__wrapper visitedCountries__wrapper--Antarctica"></div>
+                        <div
+                            class="visitedCountries__wrapper visitedCountries__wrapper--Antarctica singleCountryContinent">
+                        </div>
                     </div>
                 </div>
             </div>
