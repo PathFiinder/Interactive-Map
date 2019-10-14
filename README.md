@@ -1,6 +1,6 @@
 # Interactive-Map
 
-App "Interactive map" created using jVectorMap - http://jvectormap.com/. App let the user to choose countries from all over the world which they have visited.
+App "Interactive map" is created using jVectorMap - http://jvectormap.com/. App let the user to choose countries from all over the world which they have visited.
 
 Tech Work used:
 - HTML5
